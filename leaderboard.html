@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>SITH | GAME DEV Leaderboard</title>
+    <meta name="description" content="Stay updated with the latest news and resources from SITH Game Dev.">
+    <meta name="theme-color" content="#f54254">
+    <link rel="icon" type="image/png" sizes="300x250" href="assets/img/superthumb.png">
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alfa+Slab+One">
+    <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/fonts/ionicons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <style>
+        /* Existing styles... */
+
+        /* Adjusted text color */
+        body {
+            background-color: var(--background);
+            color: #333; /* Adjusted text color */
+            margin-bottom: 20px;
+        }
+
+        /* Styles for the leaderboard */
+        .leaderboard-entry {
+            display: none;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px;
+            border-bottom: 1px solid #fff;
+        }
+
+        /* Additional styles for the floating tiles */
+        #floatingTile {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 700px;
+            height: 500px;
+            background-color: #f54254;
+            border-radius: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: transform 0.3s ease-in-out;
+            z-index: 1000;
+        }
+
+        #floatingTile:hover {
+            transform: translate(-50%, -50%) scale(1.05);
+        }
+
+        /* Centering the Game Dev Leaderboard heading */
+        #leaderboard h2 {
+            color: #f54254;
+            text-align: center;
+        }
+
+        /* Styles for the leaderboard tabs */
+        .leaderboard-tabs {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0 20px 0;
+        }
+
+        .leaderboard-tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            background-color: #f54254;
+            color: #fff;
+            border-radius: 10px;
+            margin: 0 10px;
+        }
+
+        .leaderboard-tab.active {
+            background-color: #fff;
+            color: #f54254;
+        }
+
+      
+
+        /* Hover effect for floating tiles */
+        #floatingTile {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 700px; /* Adjusted width */
+            height: 500px; /* Adjusted height */
+            background-color: #f54254; /* Set the background color to red */
+            border-radius: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: transform 0.3s ease-in-out;
+            z-index: 1000; /* Set a higher z-index to make it appear above other elements */
+        }
+
+        #floatingTile:hover {
+            transform: translate(-50%, -50%) scale(1.05);
+        }
+
+        .leaderboard-entry {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px;
+            border-bottom: 1px solid #fff;
+        }
+
+        .circle-logo {
+            width: 50px;
+            height: 50px;
+            background-color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+        }
+
+        .name-text {
+            color: #fff;
+            font-weight: bold;
+            margin-right: 20px;
+        }
+
+        .progress-bar-container {
+            width: 50%; /* Adjusted width to accommodate the progress bar and value */
+            display: flex;
+            flex-direction: column;
+        }
+
+        .progress-bar {
+            height: 20px;
+            background-color: #808080; /* Set the background color of the progress bar to gray */
+            border-radius: 10px;
+            margin-bottom: 5px;
+            width: 100%; /* Filled up 100% */
+        }
+
+        .progress-value {
+            color: #ffffff; /* Change text color to white */
+            font-weight: bold;
+            text-align: right; /* Align text to the right */
+        }
+
+        .progress-fill {
+            height: 100%;
+            border-radius: 8px;
+            background-color: #f54254; /* Set the fill color to red */
+            width: 0; /* Initially no width */
+            animation: fillProgress 7s ease-in-out backwards;
+        }
+
+        .progress-fill2 {
+            height: 100%;
+            border-radius: 8px;
+            background-color: #f54254; /* Set the fill color to red */
+            width: 0; /* Initially no width */
+            animation: fillProgress 7s ease-in-out backwards;
+        }
+
+        .progress-fill3 {
+            height: 100%;
+            border-radius: 8px;
+            background-color: #f54254; /* Set the fill color to red */
+            width: 0; /* Initially no width */
+            animation: fillProgress 7s ease-in-out backwards;
+        }
+
+        /* Set the custom progress bar colors and styles */
+        .progress-fill-1 {
+            background-color: #031B88;
+            animation: fillProgress1 3s ease-in-out forwards;
+        }
+
+        .progress-fill-2 {
+            background-color: #6096FD;
+            animation: fillProgress2 4s ease-in-out forwards;
+        }
+
+        .progress-fill-3 {
+            background-color: #AAB6FB;
+            animation: fillProgress3 4s ease-in-out forwards;
+        }
+
+        .progress-fill-4 {
+            background-color: #FB7B8E;
+            animation: fillProgress4 4s ease-in-out forwards;
+        }
+
+        .progress-fill-5 {
+            background-color: #FAA7B8;
+            animation: fillProgress5 4s ease-in-out forwards;
+        }
+
+        .progress-fill-6 {
+            background-color: #AC92EB;
+            animation: fillProgress6 2s ease-in-out forwards;
+        }
+
+        .progress-fill-7 {
+            background-color: #4FC1E8;
+            animation: fillProgress7 3s ease-in-out forwards;
+        }
+
+        .progress-fill-8 {
+            background-color: #A0D568;
+            animation: fillProgress8 3s ease-in-out forwards;
+        }
+
+        .progress-fill-9 {
+            background-color: #FFCE54;
+            animation: fillProgress9 3s ease-in-out forwards;
+        }
+
+        .progress-fill-10 {
+            background-color: #ED5564;
+            animation: fillProgress10 3s ease-in-out forwards;
+        }
+
+        .progress-fill-11 {
+            background-color: #6AAB9C;
+            animation: fillProgress11 1.5s ease-in-out forwards;
+        }
+
+        .progress-fill-12 {
+            background-color: #FA9284;
+            animation: fillProgress12 2s ease-in-out forwards;
+        }
+
+        .progress-fill-13 {
+            background-color: #E06C78;
+            animation: fillProgress13 2s ease-in-out forwards;
+        }
+
+        .progress-fill-14 {
+            background-color: #5874DC;
+            animation: fillProgress14 2s ease-in-out forwards;
+        }
+
+        .progress-fill-15 {
+            background-color: #384E78;
+            animation: fillProgress15 2s ease-in-out forwards;
+        }
+
+        /* Keyframes for each rank (1-15) */
+        @keyframes fillProgress1 {
+            to {
+                width: 95%;
+            }
+        }
+
+        @keyframes fillProgress2 {
+            to {
+                width: 90%;
+            }
+        }
+
+        @keyframes fillProgress3 {
+            to {
+                width: 85%;
+            }
+        }
+
+        @keyframes fillProgress4 {
+            to {
+                width: 80%;
+            }
+        }
+
+        @keyframes fillProgress5 {
+            to {
+                width: 75%;
+            }
+        }
+
+        @keyframes fillProgress6 {
+            to {
+                width: 70%;
+            }
+        }
+
+        @keyframes fillProgress7 {
+            to {
+                width: 65%;
+            }
+        }
+
+        @keyframes fillProgress8 {
+            to {
+                width: 60%;
+            }
+        }
+
+        @keyframes fillProgress9 {
+            to {
+                width: 55%;
+            }
+        }
+
+        @keyframes fillProgress10 {
+            to {
+                width: 50%;
+            }
+        }
+
+        @keyframes fillProgress11 {
+            to {
+                width: 45%;
+            }
+        }
+
+        @keyframes fillProgress12 {
+            to {
+                width: 40%;
+            }
+        }
+
+        @keyframes fillProgress13 {
+            to {
+                width: 35%;
+            }
+        }
+
+        @keyframes fillProgress14 {
+            to {
+                width: 30%;
+            }
+        }
+
+        @keyframes fillProgress15 {
+            to {
+                width: 25%;
+            }
+        }
+
+      .active {
+        background-color:white;
+      }
+    </style>
+</head>
+<body style="background: url('https://cdn.discordapp.com/attachments/917589799299321897/1190534336303333436/wp10834051-4k-anime-view-wallpapers.jpg?ex=65a22680&is=658fb180&hm=e6b48c8304fdcfe0a1bb4deca862b1be57c9c9bc8208877472c5d3a492fd6351&'); background-size: cover;">
+<body>
+    <!-- Top Navigation Bar -->
+    <div id="top">
+        <nav class="navbar navbar-light navbar-expand fixed-top" style="color: var(--main-color); border-top-width: 6px; border-top-style: solid; background: var(--background);">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#" style="color: var(--main-color); font-family: 'Alfa Slab One', cursive;">SITH | GAME DEV </a>
+                <button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navcol-1">
+                    <ul class="nav navbar-nav">
+                        <li class="nav-item"><a class="nav-link" href="index.html" style="color: var(--text-color);">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="blog.html" style="color: var(--text-color);">Blog</a></li>
+                        <li class="nav-item active"><a class="nav-link smoothScroll" href="#leaderboard" style="color: var(--text-color);">Leaderboard</a></li>
+                        <li class="nav-item"><a class="nav-link" href="about-us.html" style="color: var(--text-color);">About us</a></li>
+                        <li class="nav-item"><a class="nav-link" href="https://discord.gg/hcj7bh6qdV" style="color: var(--text-color);">Join</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <!-- Leaderboard Section -->
+    <div id="leaderboard" style="padding-top: 40px; padding-bottom: 40px;">
+        <div class="container">
+            <h2>Game Dev Leaderboard</h2>
+
+            <!-- Leaderboard Tabs -->
+            <div class="leaderboard-tabs">
+                <div class="leaderboard-tab active" onclick="showLeaderboard('rank1to5')">Rank 1-5</div>
+                <div class="leaderboard-tab" onclick="showLeaderboard('rank6to10')">Rank 6-10</div>
+                <div class="leaderboard-tab" onclick="showLeaderboard('rank11to15')">Rank 11-15</div>
+            </div>
+
+            <!-- Leaderboard Content -->
+            <div id="floatingTile">
+                <!-- Rank 1-5 -->
+                <div id="rank1to5-1" class="leaderboard-entry">
+                    <div class="circle-logo">⭐</div>
+                    <div class="name-text">1. Danny Chen</div>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar">
+                            <div class="progress-fill progress-fill-1"></div>
+                        </div>
+                        <div class="progress-value">299 points</div>
+                    </div>
+                </div>
+                <div id="rank1to5-2" class="leaderboard-entry">
+                    <div class="circle-logo">⭐</div>
+                    <div class="name-text">2. Leo Yang</div>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar">
+                            <div class="progress-fill progress-fill-2"></div>
+                        </div>
+                        <div class="progress-value">250 points</div>
+                    </div>
+                </div>
+                <div id="rank1to5-3" class="leaderboard-entry">
+                    <div class="circle-logo">⭐</div>
+                    <div class="name-text">3. Evan Gao</div>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar">
+                            <div class="progress-fill progress-fill-3"></div>
+                        </div>
+                        <div class="progress-value">230 points</div>
+                    </div>
+                </div>
+                <div id="rank1to5-4" class="leaderboard-entry">
+                    <div class="circle-logo">⭐</div>
+                    <div class="name-text">4. Jack Shen</div>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar">
+                            <div class="progress-fill progress-fill-4"></div>
+                        </div>
+                        <div class="progress-value">222 points</div>
+                    </div>
+                </div>
+                <div id="rank1to5-5" class="leaderboard-entry">
+                    <div class="circle-logo">⭐</div>
+                    <div class="name-text">5. Jason Shi</div>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar">
+                            <div class="progress-fill progress-fill-5"></div>
+                        </div>
+                        <div class="progress-value">198 points</div>
+                    </div>
+                </div>
+
+                <!-- Rank 6-10 -->
+                <div id="rank6to10-1" class="leaderboard-entry" style="display: none;">
+                    <div class="circle-logo">⭐</div>
+                    <div class="name-text">6. Ching Chen</div>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar">
+                            <div class="progress-fill2 progress-fill-6"></div>
+                        </div>
+                        <div class="progress-value">179 points</div>
+                    </div>
+                </div>
+                <div id="rank6to10-2" class="leaderboard-entry" style="display: none;">
+                    <div class="circle-logo">⭐</div>
+                    <div class="name-text">7. Ming Yang</div>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar">
+                            <div class="progress-fill2 progress-fill-7"></div>
+                        </div>
+                        <div class="progress-value">170 points</div>
+                    </div>
+                </div>
+                <div id="rank6to10-3" class="leaderboard-entry" style="display: none;">
+                    <div class="circle-logo">⭐</div>
+                    <div class="name-text">8. Xiao Mai Nu</div>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar">
+                            <div class="progress-fill2 progress-fill-8"></div>
+                        </div>
+                        <div class="progress-value">160 points</div>
+                    </div>
+                </div>
+                <div id="rank6to10-4" class="leaderboard-entry" style="display: none;">
+                    <div class="circle-logo">⭐</div>
+                    <div class="name-text">9. literally the goat</div>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar">
+                            <div class="progress-fill2 progress-fill-9"></div>
+                        </div>
+                        <div class="progress-value">152 points</div>
+                    </div>
+                </div>
+                <div id="rank6to10-5" class="leaderboard-entry" style="display: none;">
+                    <div class="circle-logo">⭐</div>
+                    <div class="name-text">10. leo is the goat</div>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar">
+                            <div class="progress-fill2 progress-fill-10"></div>
+                        </div>
+                        <div class="progress-value">148 points</div>
+                    </div>
+                </div>
+
+                <!-- Rank 11-15 -->
+                <div id="rank11to15-1" class="leaderboard-entry" style="display: none;">
+                    <div class="circle-logo">⭐</div>
+                    <div class="name-text">11. Chen</div>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar">
+                            <div class="progress-fill3 progress-fill-11"></div>
+                        </div>
+                        <div class="progress-value">79 points</div>
+                    </div>
+                </div>
+                <div id="rank11to15-2" class="leaderboard-entry" style
+                  ="display: none;">
+                                      <div class="circle-logo">⭐</div>
+                                      <div class="name-text">12. Yang</div>
+                                      <div class="progress-bar-container">
+                                          <div class="progress-bar">
+                                              <div class="progress-fill3 progress-fill-12"></div>
+                                          </div>
+                                          <div class="progress-value">70 points</div>
+                                      </div>
+                                  </div>
+                                  <div id="rank11to15-3" class="leaderboard-entry" style="display: none;">
+                                      <div class="circle-logo">⭐</div>
+                                      <div class="name-text">13. Xiao</div>
+                                      <div class="progress-bar-container">
+                                          <div class="progress-bar">
+                                              <div class="progress-fill3 progress-fill-13"></div>
+                                          </div>
+                                          <div class="progress-value">60 points</div>
+                                      </div>
+                                  </div>
+                                  <div id="rank11to15-4" class="leaderboard-entry" style="display: none;">
+                                      <div class="circle-logo">⭐</div>
+                                      <div class="name-text">14. goat</div>
+                                      <div class="progress-bar-container">
+                                          <div class="progress-bar">
+                                              <div class="progress-fill3 progress-fill-14"></div>
+                                          </div>
+                                          <div class="progress-value">52 points</div>
+                                      </div>
+                                  </div>
+                                  <div id="rank11to15-5" class="leaderboard-entry" style="display: none;">
+                                      <div class="circle-logo">⭐</div>
+                                      <div class="name-text">15. the goat</div>
+                                      <div class="progress-bar-container">
+                                          <div class="progress-bar">
+                                              <div class="progress-fill3 progress-fill-15"></div>
+                                          </div>
+                                          <div class="progress-value">48 points</div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+
+                      <!-- Copyright information -->
+                      <div style="position: fixed; bottom: 0; width: 100%; text-align: center; background-color: #f54254; padding: 10px;">
+                          <p style="color: #fff; margin-bottom: 0;">SITH Game Dev © 2024</p>
+                          <p style="color: #fff; margin-bottom: 0;">Website made by Danny Chen</a>
+                        </p>
+                      </div>
+
+                      <script src="assets/js/jquery.min.js"></script>
+                      <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+                      <script src="assets/js/Counting.js"></script>
+                      <script src="assets/js/untitled.js"></script>
+                      <script>
+                          function showLeaderboard(tabId) {
+                              // Hide all leaderboards
+                              document.querySelectorAll('.leaderboard-entry').forEach(entry => {
+                                  entry.style.display = 'none';
+                              });
+
+                              // Show the selected leaderboard with custom progress bar percentages
+                              const progressBarPercentages = [99, 90, 85, 70, 69, 50, 49, 30, 29, 25, 22, 21, 19, 10, 3];
+
+                              for (let i = 1; i <= 15; i++) {
+                                  const entryId = `${tabId}-${i}`;
+                                  const entry = document.getElementById(entryId);
+                                  if (entry) {
+                                      entry.style.display = 'flex';
+
+                                      // Set custom progress bar percentage
+                                      const progressBar = entry.querySelector('.progress-fill');
+                                      if (progressBar) {
+                                          progressBar.style.width = `${progressBarPercentages[i - 1]}%`;
+                                      }
+                                  }
+                              }
+                          }
+                      </script>
+                  </body>
+
+                  </html>
