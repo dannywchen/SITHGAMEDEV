@@ -18,13 +18,19 @@ import { RouterLink, RouterView } from 'vue-router'
   </header>
 
   <RouterView />
+
+  <footer>
+    <span class="copyright">SITHS Game Dev © 2024</span>
+    <br />
+    <span class="credits">Website made by Danny Chen - MeritOfDragons#6339</span>
+  </footer>
 </template>
 
 <style scoped>
 header {
   z-index: 1;
   position: fixed;
-  top: 0%;
+  background: var(--color-background);
   width: 100vw;
 }
 
@@ -39,7 +45,7 @@ h1 {
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding: 0 1rem 0 1rem;
+  padding: 1.5rem 1rem 0 1rem;
   border-top-color: rgb(189, 0, 0);
   border-top-style: solid;
 }
@@ -51,9 +57,7 @@ nav {
 nav a.router-link-exact-active {
   color: var(--color-text);
 }
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
+
 nav a {
   display: inline-block;
   padding: 0 1rem;
@@ -61,5 +65,16 @@ nav a {
 }
 nav a:first-of-type {
   border: 0;
+}
+
+footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+span {
+  color: var(--color-text);
 }
 </style>
