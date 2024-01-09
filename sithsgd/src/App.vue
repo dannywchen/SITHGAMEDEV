@@ -1,4 +1,4 @@
-<script setup>
+<script>
 import { RouterLink, RouterView } from 'vue-router'
 </script>
 
@@ -12,7 +12,7 @@ import { RouterLink, RouterView } from 'vue-router'
         <RouterLink to="/blog">Blog</RouterLink>
         <RouterLink to="/leaderboard">Leaderboard</RouterLink>
         <RouterLink to="/aboutus">About Us</RouterLink>
-        <RouterLink to="/join">Join</RouterLink>
+        <a href="https://discord.gg/hcj7bh6qdV" target="_blank">Join</a>
       </nav>
     </div>
   </header>
@@ -45,8 +45,8 @@ h1 {
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding: 1.5rem 1rem 0 1rem;
-  border-top-color: rgb(189, 0, 0);
+  padding: 1.5rem 1rem 0.35rem 1rem;
+  border-top-color: #f54254;
   border-top-style: solid;
 }
 

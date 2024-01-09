@@ -26,10 +26,7 @@ export default {}
     <p>
       Learn about the powerful features and capabilities of Unreal Engine 5. Dive into the world of
       game development with cutting-edge technology.
-      <a
-        href="https://6a28bbe5-2791-40de-925c-f5a48c4968de-00-2oi0dsgjz6zl6.picard.replit.dev/blog.html#"
-        >Read more...</a
-      >
+      <a href="">Read more...</a>
     </p>
   </div>
 </template>
@@ -41,6 +38,7 @@ export default {}
   width: 50%;
   min-height: 30rem;
   backdrop-filter: blur(20px);
+  border: 1px solid var(--vt-c-red);
 }
 h2 {
   color: white;

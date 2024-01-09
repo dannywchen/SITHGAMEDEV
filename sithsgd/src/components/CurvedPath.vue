@@ -10,7 +10,7 @@
 
 <style scoped>
 path {
-  fill: var(--color-background);
+  fill: var(--color-background-soft);
   opacity: 1;
 }
 </style>

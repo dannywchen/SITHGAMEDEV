@@ -33,6 +33,7 @@
   width: fit-content;
   min-height: 30rem;
   backdrop-filter: blur(20px);
+  border: 1px solid var(--vt-c-red);
 }
 h2 {
   color: white;
