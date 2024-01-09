@@ -1,5 +1,5 @@
 <script setup>
-import GameDevResources from '../components/GameDevResources.vue'
+import GameDevResources from '../components/GamedevResources.vue'
 import Blog from '../components/BlogComponent.vue'
 </script>
 
