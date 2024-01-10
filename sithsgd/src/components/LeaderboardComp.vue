@@ -1,32 +1,32 @@
 <script>
-import { ref } from 'vue'
+import { ref } from "vue";
 
 export default {
   data() {
     return {
       group1Vis: ref(true),
       group2Vis: ref(false),
-      group3Vis: ref(false)
-    }
+      group3Vis: ref(false),
+    };
   },
   methods: {
     btn1() {
-      this.group1Vis = true
-      this.group2Vis = false
-      this.group3Vis = false
+      this.group1Vis = true;
+      this.group2Vis = false;
+      this.group3Vis = false;
     },
     btn2() {
-      this.group1Vis = false
-      this.group2Vis = true
-      this.group3Vis = false
+      this.group1Vis = false;
+      this.group2Vis = true;
+      this.group3Vis = false;
     },
     btn3() {
-      this.group1Vis = false
-      this.group2Vis = false
-      this.group3Vis = true
-    }
-  }
-}
+      this.group1Vis = false;
+      this.group2Vis = false;
+      this.group3Vis = true;
+    },
+  },
+};
 </script>
 
 <template>
@@ -34,7 +34,8 @@ export default {
     <h2>Game Dev Leaderboard</h2>
 
     <div class="buttons">
-      <button @click="btn1">Rank 1-5</button><button @click="btn2">Rank 6-10</button
+      <button @click="btn1">Rank 1-5</button
+      ><button @click="btn2">Rank 6-10</button
       ><button @click="btn3">Rank 11-15</button>
     </div>
 

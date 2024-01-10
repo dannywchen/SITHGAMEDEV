@@ -6,7 +6,6 @@ import Path from '../components/CurvedPath.vue'
 <template>
   <main>
     <Home />
-    <Path />
   </main>
 </template>
 
